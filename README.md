@@ -9,4 +9,4 @@ UMLGenerator
 -Esclusione dei metodi costruttori <b>done</b><br />
 -Migliore formattazione del UML generato<br />
 -Generazione diretta del file UML sottoforma di file XML<br />
--Selezione del file sorgente/output trammite interfaccia grafica<br />
+-Selezione del file sorgente/output trammite interfaccia grafica <b>done</b><br />
