@@ -1,0 +1,71 @@
+import java.io.File;
+import java.io.*;
+import javax.swing.*;
+public class UMLGen1_1 {
+	public static void main(String[] args){
+		String path1,path2,nomeClasse = new String("");
+		int val;
+		//Creao un puntatore alla directory dell'utente
+		JFileChooser path3 = new JFileChooser();
+		
+		val = path3.showOpenDialog(null);
+		if(val == JFileChooser.APPROVE_OPTION){ //Se è stato seleionato un file
+			System.out.println("Apretura "+path3.getSelectedFile());
+		}
+
+		path2 = JOptionPane.showInputDialog(null,"Inserisci il nome del file in cui scrivere l'UML: ");
+
+		try{
+			//Creo un colleamento al file
+			File file = new File(path3.getSelectedFile().getName());
+			//Creo una string che memorizza la linea del file
+			String line = new String();
+			//Creo una stringa che memorizza la linea che verra' stampata nel file
+			String fileLine;
+			//Apro il file in input
+			FileInputStream input = new FileInputStream(file);
+			//Lo unisco allo stream Buffered per leggere linea per linea
+			BufferedReader in = new BufferedReader(new InputStreamReader(input));
+
+
+			//Ora apro il file in modalita' output per poterci scrivere
+			File output = new File(path2);
+			//Apro lo stream di lettura
+			//!FileOutputStream out = new FileOutputStream(output);
+			FileWriter out = new FileWriter(output);
+			//Ora lo unisco allo stream BufferedWriter per poter scrivere linnee intere
+			BufferedWriter writeFile = new BufferedWriter(out);  //new OutputStreamWriter(out)
+
+				while((line = in.readLine()) != null){
+					line = line.trim();
+					
+					if(line.length()>7){
+						if(line.startsWith("public class")){
+							writeFile.write(line.substring(13,line.length()-1)+"\n");
+							nomeClasse=line.substring(13,line.length()-1).trim();
+						}//if
+						else{
+							if(!line.startsWith("public "+nomeClasse)){
+								if(line.startsWith("pu")){
+									writeFile.write("+"+line.substring(7,line.length()-1)+"\n");
+								}//if
+								else{
+									if(line.startsWith("pri")){
+										writeFile.write("-"+line.substring(8,line.length()-1)+"\n");
+									}
+									else{
+										if(line.startsWith("pro")){
+											writeFile.write("#"+line.substring(10,line.length()-1)+"\n");
+										}//if
+									}//else
+								}//else
+							}//if
+						}//else
+					}//if
+					writeFile.flush();
+				}//while	
+		}catch (IOException e) {
+			 e.printStackTrace();
+		}
+	}//main
+}//class
