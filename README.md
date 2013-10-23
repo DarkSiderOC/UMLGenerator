@@ -7,6 +7,6 @@ UMLGenerator
 -Riconoscimento del nome della classe <b>done</b><br />
 -Migliore utilizzo della stringa di buffer <b>done</b><br />
 -Esclusione dei metodi costruttori <b>done</b><br />
--Migliore formattazione del UML generato<br />
+-Migliore formattazione del UML generato <b>done</b><br />
 -Generazione diretta del file UML sottoforma di file XML<br />
 -Selezione del file sorgente/output trammite interfaccia grafica <b>done</b><br />
